@@ -4,55 +4,37 @@ import { motion } from "framer-motion";
 import {
   Phone,
   Star,
+  MessageCircle,
   Menu as MenuIcon,
   X,
   MapPin,
   Clock,
   Instagram,
   Facebook,
+  Mail,
 } from "lucide-react";
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
 
 const KedaiTerasBudePage = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   const menu = [
-    {
-      name: "Ayam Geprek",
-      price: "Rp 12.000",
-      img: "/menu/ayam-geprek.webp",
-    },
+    { name: "Ayam Geprek", price: "Rp 12.000", img: "/menu/ayam-geprek.webp" },
     {
       name: "Chicken Katsu",
       price: "Rp 20.000",
       img: "/menu/chicken-katsu.webp",
     },
-    {
-      name: "Gule Iga",
-      price: "Rp 35.000",
-      img: "/menu/gule-iga.webp",
-    },
-    {
-      name: "Pepes Ayam",
-      price: "Rp 12.000",
-      img: "/menu/pepes-ayam.webp",
-    },
-    {
-      name: "Sop Iga",
-      price: "Rp 30.000",
-      img: "/menu/sop-iga.webp",
-    },
+    { name: "Gule Iga", price: "Rp 35.000", img: "/menu/gule-iga.webp" },
+    { name: "Pepes Ayam", price: "Rp 12.000", img: "/menu/pepes-ayam.webp" },
+    { name: "Sop Iga", price: "Rp 30.000", img: "/menu/sop-iga.webp" },
   ];
 
   return (
     <div className="w-full min-h-screen bg-white text-gray-900 font-sans">
       {/* NAVBAR */}
-      <header className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
+      <header className="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-xl shadow-md">
         <div className="max-w-6xl mx-auto flex items-center justify-between py-4 px-6">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <img
               src="/logo/logo.webp"
               alt="Logo"
@@ -60,65 +42,62 @@ const KedaiTerasBudePage = () => {
             />
             <h1 className="font-bold text-xl">Kedai Teras Bude</h1>
           </div>
-          <nav className="hidden md:flex gap-6 font-semibold text-gray-800">
-            <a href="#menu" className="hover:text-yellow-600 transition">
-              Menu
-            </a>
-            <a href="#galeri" className="hover:text-yellow-600 transition">
-              Galeri
-            </a>
 
-            <a href="#lokasi" className="hover:text-yellow-600 transition">
-              Lokasi
-            </a>
-            <a href="#kontak" className="hover:text-yellow-600 transition">
-              Kontak
-            </a>
+          <nav className="hidden md:flex gap-8 font-medium text-gray-800">
+            {["menu", "galeri", "testimoni", "lokasi", "kontak"].map((link) => (
+              <a
+                key={link}
+                href={`#${link}`}
+                className="hover:text-yellow-600 transition"
+              >
+                {link.charAt(0).toUpperCase() + link.slice(1)}
+              </a>
+            ))}
           </nav>
+
           <button className="md:hidden" onClick={() => setOpenMenu(!openMenu)}>
             {openMenu ? <X size={28} /> : <MenuIcon size={28} />}
           </button>
         </div>
+
         {openMenu && (
           <div className="md:hidden bg-white shadow-lg py-4 px-6 flex flex-col gap-4 font-semibold text-gray-800">
-            <a href="#menu" onClick={() => setOpenMenu(false)}>
-              Menu
-            </a>
-            <a href="#galeri" onClick={() => setOpenMenu(false)}>
-              Galeri
-            </a>
-
-            <a href="#lokasi" onClick={() => setOpenMenu(false)}>
-              Lokasi
-            </a>
-            <a href="#kontak" onClick={() => setOpenMenu(false)}>
-              Kontak
-            </a>
+            {["menu", "galeri", "testimoni", "lokasi", "kontak"].map((link) => (
+              <a
+                key={link}
+                href={`#${link}`}
+                onClick={() => setOpenMenu(false)}
+              >
+                {link.charAt(0).toUpperCase() + link.slice(1)}
+              </a>
+            ))}
           </div>
         )}
       </header>
 
-      {/* HERO */}
+      {/* HERO SECTION */}
       <section
         id="hero"
-        className="relative w-full h-auto mt-20 py-5 bg-cover bg-no-repeat bg-center flex items-center justify-center"
-        style={{ backgroundImage: `url(/images/hero.webp)` }}
+        className="relative w-full h-[90vh] bg-cover bg-center flex items-center justify-center"
+        style={{ backgroundImage: "url(/images/hero.webp)" }}
       >
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/60" />
+
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative text-center px-4"
+          className="relative text-center px-6"
         >
-          <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-lg">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-white drop-shadow-xl">
             Kedai Teras Bude
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 font-medium">
-            Rumah makan nyaman dengan cita rasa rumahan
+          <p className="text-xl md:text-2xl mt-3 text-white/90">
+            Nikmati cita rasa rumahan dengan suasana nyaman & hangat
           </p>
+
           <button
-            className="mt-6 px-6 py-3 bg-yellow-500 text-white font-bold rounded-xl text-lg shadow-lg hover:bg-yellow-400 transition"
+            className="mt-6 px-8 py-4 bg-yellow-500 text-white font-bold rounded-xl text-lg shadow-xl hover:bg-yellow-400 hover:scale-105 transition"
             onClick={() =>
               window.open(
                 "https://wa.me/6282126015100?text=Halo%20Kedai%20Teras%20Bude%2C%20saya%20ingin%20pesan%20makanan",
@@ -132,12 +111,12 @@ const KedaiTerasBudePage = () => {
       </section>
 
       {/* MENU */}
-      <section id="menu" className="py-16 px-6">
-        <h2 className="text-center text-3xl md:text-4xl font-bold mb-10">
+      <section id="menu" className="py-20 px-6 bg-gray-50">
+        <h2 className="text-center text-3xl md:text-4xl font-bold mb-12">
           Menu Terbaik Kami
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {menu.map((item) => (
             <motion.div
               key={item.name}
@@ -145,111 +124,82 @@ const KedaiTerasBudePage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:scale-[1.03] transition cursor-pointer flex flex-col"
+              className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all cursor-pointer"
             >
-              <img
-                src={item.img}
-                alt={item.name}
-                className="w-full h-56 object-cover" // FIX HEIGHT
-              />
+              <div className="w-full aspect-[4/3] overflow-hidden">
+                <img
+                  src={item.img}
+                  alt={item.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-              <div className="p-4 text-center flex flex-col flex-grow justify-between">
-                <h3 className="text-xl font-semibold mb-1">{item.name}</h3>
-                <p className="text-yellow-600 font-bold">{item.price}</p>
+              <div className="p-5 text-center">
+                <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
+                <p className="text-yellow-600 font-extrabold">{item.price}</p>
               </div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* TESTIMONI */}
-      <section
-        id="testimoni"
-        className="py-16 px-6 text-center max-w-5xl mx-auto"
+      {/* Floatin WA */}
+      <a
+        href="https://wa.me/6282126015100?text=Halo%20kak,%20saya%20mau%20tanya%20tentang%20menu%20kedai%20teras%20bude"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-xl transition-all flex items-center justify-center"
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-8">
-          Testimoni Pelanggan
-        </h2>
-        <div className="flex flex-col md:flex-row gap-6 justify-center">
-          <div className="bg-white shadow-lg p-6 rounded-2xl max-w-sm mx-auto">
-            <div className="flex justify-center gap-1 mb-3">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} fill="gold" stroke="gold" />
-              ))}
-            </div>
-            <p className="text-lg">
-              "Makanannya enak banget, harga bersahabat. Tempatnya nyaman!"
-            </p>
-            <p className="font-bold mt-2">– Rani Permata</p>
-          </div>
-        </div>
-      </section>
+        <MessageCircle className="w-7 h-7" />
+      </a>
 
-      {/* LOKASI */}
-      <section id="lokasi" className="py-16">
+      {/* LOCATION */}
+      <section id="lokasi" className="py-16 px-6 bg-white">
         <h2 className="text-center text-3xl md:text-4xl font-bold mb-6">
-          Lokasi Kedai
+          Lokasi Kami
         </h2>
-        <div className="max-w-5xl mx-auto px-6">
+        <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+          Kunjungi Kedai Teras Bude dan nikmati suasana santai serta minuman
+          terbaik kami ☕
+        </p>
+
+        <div className="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:shadow-[0_8px_40px_rgb(0,0,0,0.2)] transition">
           <iframe
-            className="w-full h-72 rounded-2xl shadow-lg"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7930.403226279593!2d107.36996254127163!3d-6.367949324488716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6974049af38815%3A0x4db0f6275b9fec6b!2sKosambi%2C%20Duren%2C%20Klari%2C%20Karawang%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1764836711589!5m2!1sen!2sid"
+            width="100%"
+            height="400"
             loading="lazy"
-            src="https://www.google.com/maps/embed?pb=!1m18..."
+            referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
+
+        <div className="text-center mt-6">
+          <a
+            href="https://www.google.com/maps/place/Kosambi,+Duren,+Klari,+Karawang,+West+Java/@-6.3679493,107.3699625,16z/data=!3m1!4b1!4m6!3m5!1s0x2e6974049af38815:0x4db0f6275b9fec6b!8m2!3d-6.3679144!4d107.3749543!16s%2Fg%2F11b77b9y8b?entry=ttu&g_ep=EgoyMDI1MTIwMS4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank"
+            className="inline-block bg-yellow-600 hover:bg-yellow-700 text-black font-bold px-6 py-3 rounded-xl shadow-lg transition"
+          >
+            Buka Rute di Google Maps
+          </a>
+        </div>
       </section>
 
-      {/* FLOATING WA */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <a
-          href="https://wa.me/6282126015100?text=Halo%20Kedai%20Teras%20Bude%2C%20saya%20ingin%20pesan"
-          target="_blank"
-          rel="noreferrer"
-          className="flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full shadow-xl transform transition hover:scale-105"
-        >
-          <Phone size={20} />
-          <span className="hidden md:inline font-semibold">Chat WA</span>
-        </a>
-      </div>
-
       {/* FOOTER */}
-      <footer id="kontak" className="bg-yellow-400 text-black mt-16">
-        <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-          {/* Alamat */}
-          <div className="flex flex-col items-center md:items-start gap-2">
-            <div className="flex items-center gap-2">
-              <MapPin size={20} />
-              <h3 className="font-bold text-lg">Alamat</h3>
-            </div>
-            <p>Jl. Mawar No.12</p>
-            <p>Kota Anda, Indonesia</p>
-          </div>
-
-          {/* Jam Buka */}
-          <div className="flex flex-col items-center md:items-start gap-2">
-            <div className="flex items-center gap-2">
-              <Clock size={20} />
-              <h3 className="font-bold text-lg">Jam Buka</h3>
-            </div>
-            <p>Senin - Minggu: 08.00 – 21.00</p>
+      <footer id="kontak" className="bg-yellow-400 text-black mt-10">
+        <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
+          <div>
+            <h3 className="font-bold text-lg flex items-center gap-2">
+              <Clock size={20} /> Jam Buka
+            </h3>
+            <p className="mt-2">Senin - Minggu</p>
+            <p>08:00 – 21:00 WIB</p>
           </div>
         </div>
 
-        <div className="border-t border-black/20 mt-6 pt-4 text-center text-sm">
-          © 2025 Kedai Teras Bude — All Rights Reserved.
+        <div className="border-t border-black/20 py-4 text-center text-sm font-medium">
+          © 2025 Kedai Teras Bude — All Rights Reserved
         </div>
       </footer>
-
-      {/* LIGHTBOX */}
-      {lightboxOpen && (
-        <Lightbox
-          open={lightboxOpen}
-          close={() => setLightboxOpen(false)}
-          slides={gallery.map((src) => ({ src }))}
-          index={lightboxIndex}
-          controller={{ closeOnBackdropClick: true }}
-        />
-      )}
     </div>
   );
 };
