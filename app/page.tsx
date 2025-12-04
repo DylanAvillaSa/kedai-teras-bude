@@ -143,6 +143,69 @@ const KedaiTerasBudePage = () => {
         </div>
       </section>
 
+      {/* TESTIMONI */}
+      <section id="testimoni" className="py-16 px-6 bg-gray-50">
+        <h2 className="text-center text-3xl md:text-4xl font-bold mb-4">
+          Apa Kata Pelanggan
+        </h2>
+        <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
+          Review asli dari pelanggan yang telah menikmati hidangan terbaik di
+          Kedai Teras Bude 🍽️
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {[
+            {
+              name: "Aulia Putri",
+              review:
+                "Tempatnya cozy banget buat nongkrong bareng teman. Makanannya enak dan pelayanannya ramah. Harga juga sangat terjangkau!",
+              rating: 5,
+            },
+            {
+              name: "Rizki Maulana",
+              review:
+                "Nasi goreng spesialnya juara banget! Porsinya banyak, rasa mantap, dan cepat disajikan. Recommended deh!",
+              rating: 5,
+            },
+            {
+              name: "Sinta Amelia",
+              review:
+                "Tempat makan keluarga favorit kami sekarang. Menu variatif dan suasana homey banget. Pasti balik lagi!",
+              rating: 5,
+            },
+          ].map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition border border-gray-200"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                {[...Array(item.rating)].map((_, i) => (
+                  <svg
+                    key={i}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    className="w-5 h-5 text-yellow-500"
+                  >
+                    <path d="M12 .587l3.668 7.568L24 9.748l-6 5.848L19.335 24 12 19.897 4.665 24 6 15.596 0 9.748l8.332-1.593z" />
+                  </svg>
+                ))}
+              </div>
+
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                {item.review}
+              </p>
+              <h4 className="font-bold text-lg">{item.name}</h4>
+              <p className="text-sm text-gray-500">Customer</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* Floatin WA */}
       <a
         href="https://wa.me/6282126015100?text=Halo%20kak,%20saya%20mau%20tanya%20tentang%20menu%20kedai%20teras%20bude"
